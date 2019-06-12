@@ -1,7 +1,8 @@
 package com.example.cotroller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author: Mr.Zhang
@@ -9,10 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: 10:48 2019/6/11
  * @Modified By:
  */
-@RestController
+@Controller
 public class HelloWroldController {
-    @RequestMapping("hello")
-    public String helloWorld(){
-        return "Hello World ! Welcome to BeiJing ! Thanks";
+    @RequestMapping("/hello")
+    public String hello(Model model, @RequestParam(value="name",required = false,defaultValue ="World") String name) {
+         model.addAttribute("name",name);
+        return "hello";
+    }
+    @ResponseBody
+    @RequestMapping("/helloWorld")
+    public String helloWorld(Model model, @RequestParam(value="name",required = false,defaultValue ="World") String name) {
+        model.addAttribute("name",name);
+        return "hello";
     }
 }
